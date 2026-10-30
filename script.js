@@ -28,7 +28,7 @@ intro.from("#hero h1", { y: 48, autoAlpha: 0, ease: "power4.out" })
     // power2.out keeps the supporting copy smooth and easy to follow.
     .from("#hero p", { y: 24, autoAlpha: 0, ease: "power2.out" }, "-=0.35")
     // back.out adds a restrained lift to the calls to action.
-    .from("#hero .button, #replayBtn", {
+    .from("#hero .button", {
         y: 16,
         autoAlpha: 0,
         stagger: 0.12,
@@ -38,23 +38,12 @@ intro.from("#hero h1", { y: 48, autoAlpha: 0, ease: "power4.out" })
 
 
 
-const replayButton = document.querySelector("#replayBtn");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-replayButton.addEventListener("click", () => {
-    if (!prefersReducedMotion.matches) {
-        intro.restart();
-    }
-});
-
-
-
-
 const introMotion = gsap.matchMedia();
 introMotion.add("(prefers-reduced-motion: no-preference)", () => {
     intro.restart();
 });
 introMotion.add("(prefers-reduced-motion: reduce)", () => {
-    gsap.set(["#hero h1", "#hero p", "#hero .button", "#replayBtn"], {
+    gsap.set(["#hero h1", "#hero p", "#hero .button"], {
         autoAlpha: 1,
         clearProps: "transform"
     });
